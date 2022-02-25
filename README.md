@@ -2,7 +2,7 @@
 
 
 ### COLD Decoding
-Run the following cmd to do DeLorean decoding for counterfactual reasoning, on the example data in `data/counterfactual/small_data.json`
+Run the following cmd to do COLD decoding.
 ```
 
 ## CommonGen

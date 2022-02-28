@@ -1,10 +1,26 @@
 import torch
 import torch.nn.functional as F
-import argparse
 import json
-import nltk
 import os
+import nltk
+from nltk import tokenize
+import torch
 import numpy as np
+
+nltk.download('punkt')
+
+import sys
+import os
+if os.path.isdir('/var/karen'):
+    os.environ['TRANSFORMERS_CACHE'] = '/var/karen/workspace/Refinement-Generation/cache'
+    sys.path.insert(0, '/var/karen/workspace/Refinement-Generation/')
+
+from transformers import GPT2Tokenizer, GPT2LMHeadModel
+from tqdm import tqdm
+from difflib import SequenceMatcher
+
+from bleuloss import batch_log_bleulosscnn_ae
+from util import *
 
 
 def embed_inputs(embedding, logits, x_onehot=None, z_onehot=None, device='cuda'):
@@ -14,9 +30,6 @@ def embed_inputs(embedding, logits, x_onehot=None, z_onehot=None, device='cuda')
     # typically we embed a one-hot vector. But here since we work we work with dense representations,
     # we have softmax here to make sure that all the values of the input logits sum to one (similar to a 1-hot vector).
     probs = F.softmax(logits, dim=-1)
-
-    #print(probs.shape)
-    #print(embedding.weight.shape)
 
     if x_onehot is not None:
         probs = torch.cat((x_onehot.type(torch.FloatTensor), probs.type(torch.FloatTensor)), dim=1)
@@ -77,7 +90,6 @@ def get_text_from_logits(logits, tokenizer):
     for i in range(logits.shape[1]):
         last = _greedy(logits[:, i, :])
         output_so_far = last if output_so_far is None else torch.cat((output_so_far, last), dim=1)
-        #logp += logits[:, i, :].log_softmax(-1)[:, last.item()].item()
         logp += logits[:, i, :].log_softmax(-1).data.cpu().numpy()[:, last.data.cpu().numpy()]
 
     nll = -logp
@@ -141,8 +153,6 @@ def initialize(model, x, length, temperature, device):
         logits = logits[:, -1, :] / temperature
         logits = logits.unsqueeze(1)
         logits_so_far = logits if logits_so_far is None else torch.cat((logits_so_far, logits), dim=1)
-        # TODO (danielk): instead of embedding the logits, I think we can use the dense representation
-        #            in the output of the model: ```model_outputs.hidden_states[-1]```
         last_token_embedding = embed_inputs(embedding=model.get_input_embeddings().weight, logits=logits, device=device)
 
     return logits_so_far
@@ -231,7 +241,6 @@ def soft_distance(logits_perturbed, logits):
 def soft_nll(logits_perturbed, logits):
     p = F.softmax(logits_perturbed, dim=-1)
     logp = F.log_softmax(logits, dim=-1)
-    #return -(p * logp).sum(dim=-1).mean()
     return -(p * logp).sum(dim=-1).mean(dim=-1)
 
 
@@ -263,37 +272,13 @@ def soft_forward(model, x_onehot, y_logits, x_past=None, detach=True):
         device=x_onehot.device
     )
     xy_logits = model(past_key_values=x_past, inputs_embeds=xy_embeds).logits
-    #print(xy_logits.shape)
     x_length = x_onehot.shape[1]
     y_logits = xy_logits[:, x_length - 1:-1, :]
-    #print(y_logits.shape)
     if detach:
         return y_logits.detach()
     else:
         return y_logits
 
-
-#def soft_forward_given_x_past(model, x_past, y_logits):
-#    '''
-#    computes logits for $y$, based on a fixed context $y$ and the current logit distribution of $y$
-#    :param model:
-#    :param x_onehot:
-#    :param y_logits:
-#    :return:
-#    '''
-#    y_embeds = embed_inputs(
-#        model.get_input_embeddings().weight,
-#        y_logits,
-#        device=y_logits.device
-#    )
-#    xy_logits = model(past_key_values=x_past, inputs_embeds=y_embeds).logits
-#    print(xy_logits.shape)
-#    #x_length = x_onehot.shape[1]
-#    #y_logits = xy_logits[:, x_length - 1:-1, :]
-#    y_logits = xy_logits[:, -y_logits.shape[1] - 1:-1, :]
-#    print(y_logits.shape)
-#    exit()
-#    return y_logits.detach()
 
 def soft_forward_xyz(model, x_onehot, y_logits, z_onehot):
     '''
@@ -315,22 +300,8 @@ def soft_forward_xyz(model, x_onehot, y_logits, z_onehot):
         xy_length = x_onehot.shape[1] + y_logits.shape[1]
     else:
         xy_length = y_logits.shape[1]
-    #z_logits = xyz_logits[:, xy_length - 1:-1, :]
-    #return z_logits
     return xyz_logits, xy_length
 
-
-#def soft_backward(model, z_onehot, y_logits):
-#    xy_embeds = get_input_embeds(
-#        model.get_input_embeddings(),
-#        y_logits,
-#        y_onehot=z_onehot,
-#        device=z_onehot.device
-#    )
-#    xy_logits = model(inputs_embeds=xy_embeds).logits
-#    z_length = z_onehot.shape[1]
-#    y_logits = xy_logits[:, 1:-z_length, :]
-#    return y_logits
 
 
 def soft_backward(model, y_logits_rev):
@@ -363,13 +334,6 @@ def soft_backward_steps(model, y_logits):
 
     return logits_so_far
 
-
-#def constraint_loss(logits, cs_onehot, cs_ids):
-#    log_ps = logits.log_softmax(-1).unsqueeze(2)
-#    constraint_max_log_ps = (log_ps * cs_onehot.unsqueeze(1)).max(1)[0].sum(1)
-#    loss = -constraint_max_log_ps.sum()
-#    loss = loss / cs_onehot.size(1)
-#    return loss
 
 
 def constraint_loss(logits, cs_onehot, cs_ids):
@@ -464,17 +428,6 @@ def constraint_loss_with_variants_by_ppl(logits, cs_onehot_all, cs_ids_all, prob
 
     loss_all = loss_all / (mask_sum + 1e-8)
 
-    #loss_all = loss_all.sum()
-
-
-    #     loss_i = - (constraint_max_log_ps_.max(1)[0] * mask).mean()  # average over batch_size
-    #
-    #     loss_all += loss_i
-    #     mask_sum += mask.sum()
-    #
-    # if mask_sum != 0:
-    #     loss_all = loss_all / mask_sum
-
     return loss_all
 
 
@@ -484,7 +437,6 @@ def constraint_loss_by_ppl(logits, cs_onehot, cs_ids, logits_t):
 
     cs_onehot_ = cs_onehot.unsqueeze(1).type(torch.FloatTensor).to(device)
     ps_t = logits_t.softmax(-1).unsqueeze(2)
-    #ps_t = (logits_t / logits_t.sum(-1).unsqueeze(-1)).unsqueeze(2)
     ppl_max_idx = (ps_t * cs_onehot_).argmax(1)  # [batch_size, num_cs, vocab_size]
     ppl_max_idx_onehot = torch.zeros_like(log_ps * cs_onehot_).scatter_(1, ppl_max_idx.unsqueeze(1), cs_onehot_)
 
@@ -510,8 +462,7 @@ def constraint_loss_by_ppl(logits, cs_onehot, cs_ids, logits_t):
 def constraint_loss_all(logits, cs_onehot, cs_ids):
     device = logits.device
 
-    log_ps = logits.log_softmax(-1).unsqueeze(2)  # shape: [batch_size, length, 1, vocab_size]
-    # TODO
+    log_ps = logits.log_softmax(-1).unsqueeze(2)
     constraint_max_log_ps_ = (log_ps * cs_onehot.unsqueeze(1)).mean(1).sum(-1)  # shape: [batch_size, num_cs]
 
     ## Mask
@@ -546,9 +497,7 @@ def _constraint_loss2(logits, cs_onehot):
 def print_topk_stats(logits, tokenizer):
     logits_lg, topk_index_y = torch.topk(F.softmax(logits[0, :3, :], dim=-1), 3)
     print(logits_lg.data.cpu().numpy())
-    # print("topk_lg", topk_lg)
     print(topk_index_y.data.cpu().numpy())
-    # print("topk_index", topk_index)
     lgs = [int(x[0]) for x in topk_index_y.data.cpu().numpy()]
     for a in lgs:
         print('|', tokenizer.decode(a), '| ', end='', flush=True)
@@ -556,27 +505,6 @@ def print_topk_stats(logits, tokenizer):
     print("===============================")
     return topk_index_y
 
-import json
-import os
-import nltk
-from nltk import tokenize
-import torch
-import numpy as np
-
-nltk.download('punkt')
-
-import sys
-import os
-if os.path.isdir('/var/karen'):
-    os.environ['TRANSFORMERS_CACHE'] = '/var/karen/workspace/Refinement-Generation/cache'
-    sys.path.insert(0, '/var/karen/workspace/Refinement-Generation/')
-
-from transformers import GPT2Tokenizer, GPT2LMHeadModel
-from tqdm import tqdm
-from difflib import SequenceMatcher
-
-from bleuloss import batch_log_bleulosscnn_ae
-from util import *
 
 
 def collect_json_lines(model_output_json_file):

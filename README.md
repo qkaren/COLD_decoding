@@ -1,24 +1,34 @@
-# COLD_decoding
+# Code for "COLD Decoding: Energy-based Constrained Text Generation with Langevin Dynamics"
 
-### COLD Decoding
-Run the following cmd to do COLD decoding.
+This is the code for the following paper: 
 
-## setup your code environment
+[COLD Decoding: Energy-based Constrained Text Generation with Langevin Dynamics] (https://arxiv.org/pdf/2202.11705.pdf) \
+*Lianhui Qin, Sean Welleck, Daniel Khashabi, Yejin Choi *
+
+
+**1) Setup Environment**
 ```
 pip install -r requirement.txt
 ```
 
-## CommonGen
+**2) Download this Github**
+```
+git clone https://github.com/qkaren/COLD_decoding.git
+```
+
+**3) Run Command for COLD Decoding**
+
+* CommonGen
 ```
 sh commongen.sh
 ```
 
-## Abductive Reasoning 
+* Abductive Reasoning 
 ```
 sh abductive.sh
 ```
 
-## Counterfactual Reasoning
+* Counterfactual Reasoning
 ```
 sh counterfactual.sh
 ```

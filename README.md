@@ -1,9 +1,12 @@
 # COLD_decoding
 
-
 ### COLD Decoding
 Run the following cmd to do COLD decoding.
 
+## setup your code environment
+'''
+pip install -r requirement.txt
+'''
 
 ## CommonGen
 ```

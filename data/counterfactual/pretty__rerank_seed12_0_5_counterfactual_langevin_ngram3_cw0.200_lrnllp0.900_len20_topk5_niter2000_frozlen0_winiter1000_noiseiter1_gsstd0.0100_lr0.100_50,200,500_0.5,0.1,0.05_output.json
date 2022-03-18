@@ -1,0 +1,90 @@
+{
+    "premise": "Ryan was called by his friend to skip work one day.",
+    "initial": "He missed his train to work and instead went to the park.",
+    "counterfactual": "But Ryan had an important project at work and went in to finish it.",
+    "original_ending": "Ryan and his friend played with birds at the park all day. At the end of the day, they left the park and saw Ryan's boss. Ryan got fired.",
+    "generation_complete": [
+        [
+            "Ryan was called by his friend to skip work one day. But Ryan had an important project at work and went in to finish it.",
+            [
+                "  \"I was like, 'I'm going to do this and this played,' birds. I was like, 'I'm going to do this and this played.'",
+                "  \"I was like, 'I'm going to do this friend played with the kids,'\" he said. \"I was like, 'I'm going to do this friend played with the kids.'\"",
+                "  \"I was like, 'I'm going to go and do this friend played with the kids,'\" he said. \"I was like, 'I'm going to do this friend played with the kids.'\"",
+                "  \"I was like, 'I'm going to go friend played with the park,'\" Ryan said. \"I was like, 'I'm going to go play with the park.'\"",
+                "  \"I was like, 'I'm going to do friend played with the kids and I'm going to do this,'\" he said.",
+                "  \"I was like, 'I'm going to go friend played with the park,'\" Ryan said. \"I was like, 'I'm going to go play with the park.'\"",
+                "  \"I was like, 'I'm going to go and friend played with the park,'\" he said. \"I was like, 'I'm going to go and play with the park.'\"",
+                "  \"I was like, 'I'm going to friend played with the park and I'm going to play with the park,'\" he said.",
+                "  \"I was like, 'I'm going to do this park friend played with the kids,'\" he said. \"I was like, 'I'm going to do this park friend played with the kids.'\"",
+                "  \"I was like, 'I'm going to go and do this,'\" Ryan said. \"I was like, 'I'm going to do this.'",
+                "  \"I was like, 'I'm going to go friend played with the park,'\" Ryan said. \"I was like, 'I'm going to go play with the park.'\"",
+                "  \"I was like, 'I'm going to do this day friend played with the kids and I'm going to do this day friend played with the kids and I'm going to do this day friend played with the kids and I'm going",
+                "  \"I was like, 'I'm going to go and do this,'\" Ryan said. \"I was like, 'I'm going to do this.'",
+                "  \"I was like, 'I'm going to go and played with the kids,'\" Ryan said. \"I was like, 'I'm going to go and play with the kids.'\"",
+                "  \"I was like, 'I'm going to go friend played with the park,'\" daydreamed the young man. \"I was like, 'I'm going to go to the park and play with the park.'\"",
+                "  \"I was like, 'I'm going to do friend played with the park,'\" daydreamed the young man. \"I was like, 'I'm going to do friend played with the park.'\"",
+                "  \"I was like, 'I'm going to do this and this,'\" played played the ball to the left side of the goal.",
+                "  \"I was like, 'I'm going to go friend played with the park,'\" Ryan said. \"I was like, 'I'm going to go play with the park.'\"",
+                "  \"I was like, 'I'm going to go and do a birds park and I'm going to do a bird show,'\" he said.",
+                "  \"I was like, 'I'm going to go played with the park and I'm going to play with the kids,'\" he said.",
+                "  \"I was like, 'I'm going to friend played with the park and I'm going to play with the park,'\" he said.",
+                "  \"I was like, 'I'm going to go friend played with the park and Ryan will be there,'\" said the former player.",
+                "  \"I was like, 'I'm going to go and do friend played with the ball,'\" he said. \"I was like, 'I'm going to do this.'\"",
+                "  \"I was like, 'I'm going to friend played with the park and I'm going to play with the park,'\" he said.",
+                "  \"I was like, 'I'm going to do this friend played with the kids and I'm going to do this friend played with the kids,'\" he said.",
+                "  \"I was like, 'I'm going to go and do friend played with me parka,'\" he said. \"I was like, 'I'm going to do this.'\"",
+                "  \"I was like, 'I'm going to friend played with the kids and play friend with the kids,'\" he said. \"I was like, 'I'm going to play with the kids and play friend with the kids.'\"",
+                "  \"I was like, 'I'm going to do this and friend played with the kids,'\" he said. \"I was like, 'I'm going to do this and I'm going to do this and I'm going to do this",
+                "  \"I was like, 'I'm going to do this friend played with the kids,'\" he said. \"I was like, 'I'm going to do this friend played with the kids.'\"",
+                "  \"I was like, 'I'm going to do this friend played with the kids,'\" he said. \"I was like, 'I'm going to do this friend played with the kids.'\"",
+                "  \"I was like, 'I'm going to do this friend played with the kids,'\" he said. \"I was like, 'I'm going to do this friend played with the kids.'\"",
+                "  \"I was like, 'I'm going to friend played with the kids and play with the kids,'\" he said. \"I was like, 'I'm going to play with the kids and play with the kids.'\""
+            ]
+        ]
+    ]
+}
+{
+    "premise": "Neil had been journeying through Asia.",
+    "initial": "Now he had worked his way south into Australia.",
+    "counterfactual": "But he contracted malaria on a Thai island, and had to be flown home for treatment.",
+    "original_ending": "Neil was so excited to see Australian culture. He was thrilled at the prospect of exotic animals and people! His favorite moment was when he got to feed a baby koala bear.",
+    "generation_complete": [
+        [
+            "Neil had been journeying through Asia. But he contracted malaria on a Thai island, and had to be flown home for treatment.",
+            [
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so scared,\" he culture-ian Neil says in excitedil see. culture-ian Neil says in excitedil  \"I was so scared.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he culture minister, see see culture excited to see the world. \"I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he says. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so scared,\" he says. \"I was so excited to see my family. I was so excited to see my friends.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so scared,\" he says. \"I was so excited to see my family. I was so excited to see my friends.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the culture,\" he said. \"I was so excited to see the people who were there.",
+                "  \"I was so excited to see the world,\" he culture minister, excited see. excited. \"I was so excited to see the world.",
+                "  \"I was so excited to see the world,\" he said. \"I was so excited to see the world. I was so excited to see the world.",
+                "  \"I was so excited to see the world. I was so excited that it was excited to see the world.",
+                "  \"I was so excited to see the world,\" he culture see see culture culture. excited to see the world. \"I was so excited to see the world."
+            ]
+        ]
+    ]
+}

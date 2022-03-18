@@ -2,9 +2,9 @@
 
 ## CommonGen
 
-python3 cold_decoding.py.py \
+python3 cold_decoding.py \
 	--seed 12 \
-	--mode abductive_for_lexical \
+	--mode lexical_generation \
 	--pretrained_model gpt2-xl  \
 	--init-temp 1 \
     --length 10 \
@@ -30,5 +30,5 @@ python3 cold_decoding.py.py \
     --repeat-batch 8 \
     --print-every 200 \
     --input-file "./data/commongen/commongen.dev.jsonl" \
-	--output-dir "./data/commongen/output/" \
+	--output-dir "./data/commongen/" \
 

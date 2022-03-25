@@ -8,7 +8,7 @@ This is the code for the following paper:
 
 **1) Setup Environment**
 ```
-pip install -r requirement.txt
+pip install -r requirements.txt
 ```
 
 **2) Download this Github**

@@ -3,7 +3,7 @@
 This is the code for the following paper: 
 
 [COLD Decoding: Energy-based Constrained Text Generation with Langevin Dynamics] (https://arxiv.org/pdf/2202.11705.pdf) \
-*Lianhui Qin, Sean Welleck, Daniel Khashabi, Yejin Choi *
+Lianhui Qin, Sean Welleck, Daniel Khashabi, Yejin Choi 
 
 
 **1) Setup Environment**

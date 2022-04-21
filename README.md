@@ -33,6 +33,6 @@ sh abductive.sh
 sh counterfactual.sh
 ```
 
-**4) Ranking
+**4) Rank the generation**
 
 will add soon
